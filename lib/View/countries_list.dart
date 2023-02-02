@@ -1,3 +1,4 @@
+import 'package:covitracer/View/details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import '../Services/stats_services.dart';
@@ -73,37 +74,72 @@ class _CountriesListState extends State<CountriesList> {
                               if(searchController.text.isEmpty){
                                 return Column(
                                   children: [
-                                    ListTile(
-                                        title: Text(snapshot.data![index]
-                                        ['country']
-                                            .toString()),
-                                        subtitle: Text(snapshot.data![index]
-                                        ['cases']
-                                            .toString()),
-                                        leading: CircleAvatar(
-                                          backgroundImage: NetworkImage(
-                                              snapshot.data![index]['countryInfo']
-                                              ['flag']),
-                                          radius: 25,
-                                        ))
+                                    InkWell(
+                                      onTap: (){
+                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsScreen(
+
+                                          countryName: snapshot.data![index]['country'],
+                                          countryImage: snapshot.data![index]['countryInfo']['flag'],
+                                          todayRecovered: snapshot.data![index]['todayRecovered'],
+                                          critical: snapshot.data![index]['critical'],
+                                          active: snapshot.data![index]['active'],
+                                          test: snapshot.data![index]['tests'],
+                                          totalCases: snapshot.data![index]['cases'],
+                                          totalDeaths: snapshot.data![index]['deaths'],
+                                          totalRecovered: snapshot.data![index]['recovered'],
+
+
+                                        )
+                                        ));
+                                      },
+                                      child: ListTile(
+                                          title: Text(snapshot.data![index]
+                                          ['country']
+                                              .toString()),
+                                          subtitle: Text(snapshot.data![index]
+                                          ['cases']
+                                              .toString()),
+                                          leading: CircleAvatar(
+                                            backgroundImage: NetworkImage(
+                                                snapshot.data![index]['countryInfo']
+                                                ['flag']),
+                                            radius: 25,
+                                          )),
+                                    )
                                   ],
                                 );
                               }else if(name.toLowerCase().contains(searchController.text.toLowerCase())){
                                 return Column(
                                   children: [
-                                    ListTile(
-                                        title: Text(snapshot.data![index]
-                                        ['country']
-                                            .toString()),
-                                        subtitle: Text(snapshot.data![index]
-                                        ['cases']
-                                            .toString()),
-                                        leading: CircleAvatar(
-                                          backgroundImage: NetworkImage(
-                                              snapshot.data![index]['countryInfo']
-                                              ['flag']),
-                                          radius: 25,
-                                        ))
+                                    InkWell(
+                                      onTap: (){
+                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsScreen(
+                                          countryName: snapshot.data![index]['country'],
+                                          countryImage: snapshot.data![index]['countryInfo']['flag'],
+                                          todayRecovered: snapshot.data![index]['todayRecovered'],
+                                          critical: snapshot.data![index]['critical'],
+                                          active: snapshot.data![index]['active'],
+                                          test: snapshot.data![index]['tests'],
+                                          totalCases: snapshot.data![index]['cases'],
+                                          totalDeaths: snapshot.data![index]['deaths'],
+                                          totalRecovered: snapshot.data![index]['recovered'],
+
+                                        )));
+                                      },
+                                      child: ListTile(
+                                          title: Text(snapshot.data![index]
+                                          ['country']
+                                              .toString()),
+                                          subtitle: Text(snapshot.data![index]
+                                          ['cases']
+                                              .toString()),
+                                          leading: CircleAvatar(
+                                            backgroundImage: NetworkImage(
+                                                snapshot.data![index]['countryInfo']
+                                                ['flag']),
+                                            radius: 25,
+                                          )),
+                                    )
                                   ],
                                 );
                               }else{
