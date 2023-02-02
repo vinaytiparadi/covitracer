@@ -22,8 +22,8 @@ class _WorldStatsScreenState extends State<WorldStatsScreen> with TickerProvider
 
   @override
   void dispose(){
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 
   final colorList = <Color> [
@@ -32,9 +32,10 @@ class _WorldStatsScreenState extends State<WorldStatsScreen> with TickerProvider
     const Color(0xffEAE7B1),
   ];
 
+  StatsServices statsServices = StatsServices();
+
   @override
   Widget build(BuildContext context) {
-    StatsServices statsServices = StatsServices();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -98,9 +99,9 @@ class _WorldStatsScreenState extends State<WorldStatsScreen> with TickerProvider
                             width: 250,
                             child: FilledButton(
                               onPressed: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>CountriesList()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>const CountriesList()));
 
-                              }, child: const Text('Country Specific Stats', style: const TextStyle(fontSize: 16.5),),),
+                              }, child: const Text('Country Specific Stats', style: TextStyle(fontSize: 16.5),),),
                           )
                         ],
                       );
