@@ -5,28 +5,26 @@ import 'package:http/http.dart' as http;
 
 import '../Model/WorldStatsModel.dart';
 
-class StatsServices{
-  Future<WorldStatsModel> fetchWorldStats()async{
+class StatsServices {
+  Future<WorldStatsModel> fetchWorldStats() async {
     final response = await http.get(Uri.parse(AppUrl.worldStatesApi));
 
-    if(response.statusCode ==200){
+    if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       return WorldStatsModel.fromJson(data);
-    }else{
+    } else {
       throw Exception('Error');
     }
   }
 
-  Future<List<dynamic>> countriesListApi()async{
+  Future<List<dynamic>> countriesListApi() async {
     final response = await http.get(Uri.parse(AppUrl.countriesList));
 
-    if(response.statusCode ==200){
+    if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       return data;
-    }else{
+    } else {
       throw Exception('Error');
     }
   }
-
-
 }
