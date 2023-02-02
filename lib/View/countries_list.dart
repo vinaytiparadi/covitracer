@@ -27,6 +27,11 @@ class _CountriesListState extends State<CountriesList> {
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                   controller: searchController,
+                  onChanged: (value){
+                    setState(() {
+
+                    });
+                  },
                   decoration: InputDecoration(
                     hintText: 'Search Country',
                     contentPadding: const EdgeInsets.symmetric(horizontal: 20),
@@ -63,23 +68,49 @@ class _CountriesListState extends State<CountriesList> {
                         return ListView.builder(
                             itemCount: snapshot.data!.length,
                             itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  ListTile(
-                                      title: Text(snapshot.data![index]
-                                              ['country']
-                                          .toString()),
-                                      subtitle: Text(snapshot.data![index]
-                                              ['cases']
-                                          .toString()),
-                                      leading: CircleAvatar(
-                                        backgroundImage: NetworkImage(
-                                            snapshot.data![index]['countryInfo']
-                                                ['flag']),
-                                        radius: 25,
-                                      ))
-                                ],
-                              );
+
+                              String name = snapshot.data![index]['country'];
+                              if(searchController.text.isEmpty){
+                                return Column(
+                                  children: [
+                                    ListTile(
+                                        title: Text(snapshot.data![index]
+                                        ['country']
+                                            .toString()),
+                                        subtitle: Text(snapshot.data![index]
+                                        ['cases']
+                                            .toString()),
+                                        leading: CircleAvatar(
+                                          backgroundImage: NetworkImage(
+                                              snapshot.data![index]['countryInfo']
+                                              ['flag']),
+                                          radius: 25,
+                                        ))
+                                  ],
+                                );
+                              }else if(name.toLowerCase().contains(searchController.text.toLowerCase())){
+                                return Column(
+                                  children: [
+                                    ListTile(
+                                        title: Text(snapshot.data![index]
+                                        ['country']
+                                            .toString()),
+                                        subtitle: Text(snapshot.data![index]
+                                        ['cases']
+                                            .toString()),
+                                        leading: CircleAvatar(
+                                          backgroundImage: NetworkImage(
+                                              snapshot.data![index]['countryInfo']
+                                              ['flag']),
+                                          radius: 25,
+                                        ))
+                                  ],
+                                );
+                              }else{
+                                return Container();
+                              }
+
+
                             });
                       }
                     })),
