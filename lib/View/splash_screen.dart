@@ -8,27 +8,35 @@ class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  State createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
-  late final AnimationController _controller =
-      AnimationController(vsync: this, duration: const Duration(seconds: 5))
-        ..repeat();
+  late final AnimationController _controller;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 5),
+    )..repeat();
+
     Timer(
-        Duration(seconds: 3),
-        () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => WorldStatsScreen())));
+      const Duration(seconds: 3),
+      () => Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const WorldStatsScreen(),
+        ),
+      ),
+    );
   }
+
   @override
-  void dispose(){
+  void dispose() {
     _controller.dispose();
     super.dispose();
   }
@@ -42,18 +50,19 @@ class _SplashScreenState extends State<SplashScreen>
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             AnimatedBuilder(
-                animation: _controller,
-                child: Image(
-                  height: MediaQuery.of(context).size.height * 0.4,
-                  // width: MediaQuery.of(context).size.width * 0.4,
-                  image: const AssetImage('images/virus.png'),
-                ),
-                builder: (BuildContext context, Widget? child) {
-                  return Transform.rotate(
-                    angle: _controller.value * 2.0 * math.pi,
-                    child: child,
-                  );
-                }),
+              animation: _controller,
+              child: Image(
+                height: MediaQuery.of(context).size.height * 0.4,
+                // width: MediaQuery.of(context).size.width * 0.4,
+                image: const AssetImage('images/virus.png'),
+              ),
+              builder: (BuildContext context, Widget? child) {
+                return Transform.rotate(
+                  angle: _controller.value * 2.0 * math.pi,
+                  child: child,
+                );
+              },
+            ),
             // SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             const Align(
               alignment: Alignment.center,

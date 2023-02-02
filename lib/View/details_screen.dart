@@ -2,11 +2,11 @@ import 'package:covitracer/View/world_stats.dart';
 import 'package:flutter/material.dart';
 
 class DetailsScreen extends StatefulWidget {
-  String countryName;
-  String countryImage;
-  int totalCases, totalDeaths, totalRecovered, active, critical, todayRecovered, test;
-  DetailsScreen({
-    Key? key,
+  final String countryName;
+  final String countryImage;
+  final int totalCases, totalDeaths, totalRecovered, active, critical, todayRecovered, test;
+  const DetailsScreen({
+    super.key,
     required this.countryName,
     required this.countryImage,
     required this.todayRecovered,
@@ -15,7 +15,7 @@ class DetailsScreen extends StatefulWidget {
     required this.test,
     required this.totalCases,
     required this.totalDeaths,
-    required this.totalRecovered}) : super(key: key);
+    required this.totalRecovered,});
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();

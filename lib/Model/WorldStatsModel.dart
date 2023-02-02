@@ -1,26 +1,27 @@
 class WorldStatsModel {
   WorldStatsModel({
-      this.updated, 
-      this.cases, 
-      this.todayCases, 
-      this.deaths, 
-      this.todayDeaths, 
-      this.recovered, 
-      this.todayRecovered, 
-      this.active, 
-      this.critical, 
-      this.casesPerOneMillion, 
-      this.deathsPerOneMillion, 
-      this.tests, 
-      this.testsPerOneMillion, 
-      this.population, 
-      this.oneCasePerPeople, 
-      this.oneDeathPerPeople, 
-      this.oneTestPerPeople, 
-      this.activePerOneMillion, 
-      this.recoveredPerOneMillion, 
-      this.criticalPerOneMillion, 
-      this.affectedCountries,});
+    this.updated,
+    this.cases,
+    this.todayCases,
+    this.deaths,
+    this.todayDeaths,
+    this.recovered,
+    this.todayRecovered,
+    this.active,
+    this.critical,
+    this.casesPerOneMillion,
+    this.deathsPerOneMillion,
+    this.tests,
+    this.testsPerOneMillion,
+    this.population,
+    this.oneCasePerPeople,
+    this.oneDeathPerPeople,
+    this.oneTestPerPeople,
+    this.activePerOneMillion,
+    this.recoveredPerOneMillion,
+    this.criticalPerOneMillion,
+    this.affectedCountries,
+  });
 
   WorldStatsModel.fromJson(dynamic json) {
     updated = json['updated'];
@@ -92,5 +93,5 @@ class WorldStatsModel {
     map['affectedCountries'] = affectedCountries;
     return map;
   }
-
 }
+
