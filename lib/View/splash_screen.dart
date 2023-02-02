@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:covitracer/View/world_states.dart';
+import 'package:covitracer/View/world_stats.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
