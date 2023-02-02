@@ -36,103 +36,104 @@ class _WorldStatsScreenState extends State<WorldStatsScreen>
               FutureBuilder(
                   future: statsServices.fetchWorldStats(),
                   builder: (context, AsyncSnapshot<WorldStatsModel> snapshot) {
-                    if (!snapshot.hasData) {
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Text(snapshot.error!.toString()),
+                      );
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Expanded(
                         child: SpinKitSpinningLines(
                           color: Colors.green,
                           size: 50.0,
                         ),
                       );
-                    } else {
-                      return Column(
-                        children: [
-                          PieChart(
-                            dataMap: {
-                              'Total': double.parse(
-                                  snapshot.data!.cases!.toString()),
-                              'Recovered': double.parse(
-                                  snapshot.data!.recovered!.toString()),
-                              'Deaths': double.parse(
-                                  snapshot.data!.deaths!.toString()),
-                            },
-                            legendOptions: LegendOptions(
-                              legendPosition: LegendPosition.left,
-                              legendTextStyle: GoogleFonts.sourceSans3(
-                                  textStyle: const TextStyle(
-                                      color: Colors.black, fontSize: 15.5)),
-                            ),
-                            animationDuration:
-                                const Duration(milliseconds: 1200),
-                            chartType: ChartType.ring,
-                            colorList: colorList,
-                            chartRadius:
-                                MediaQuery.of(context).size.width / 2.5,
-                            chartValuesOptions: ChartValuesOptions(
-                              chartValueStyle: GoogleFonts.sourceSans3(
-                                textStyle: const TextStyle(
-                                    color: Colors.black, fontSize: 15.5),
-                              ),
-                              showChartValuesInPercentage: true,
-                              // showChartValuesOutside: true
-                            ),
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.06,
-                          ),
-                          Card(
-                            child: Column(
-                              children: [
-                                ReusableRow(
-                                    title: 'Total',
-                                    value: snapshot.data!.cases!.toString()),
-                                ReusableRow(
-                                    title: 'Recovered',
-                                    value:
-                                        snapshot.data!.recovered!.toString()),
-                                ReusableRow(
-                                    title: 'Death',
-                                    value: snapshot.data!.deaths!.toString()),
-                                ReusableRow(
-                                    title: 'Active',
-                                    value: snapshot.data!.active!.toString()),
-                                ReusableRow(
-                                    title: 'Critical',
-                                    value: snapshot.data!.critical!.toString()),
-                                ReusableRow(
-                                    title: 'Today Deaths',
-                                    value:
-                                        snapshot.data!.todayDeaths!.toString()),
-                                ReusableRow(
-                                    title: 'Today Recovered',
-                                    value: snapshot.data!.todayRecovered!
-                                        .toString()),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.06,
-                          ),
-                          SizedBox(
-                            height: 60,
-                            width: 250,
-                            child: FilledButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const CountriesList(),
-                                  ),
-                                );
-                              },
-                              child: const Text(
-                                'Country Specific Stats',
-                                style: TextStyle(fontSize: 16.5),
-                              ),
-                            ),
-                          )
-                        ],
-                      );
                     }
+                    return Column(
+                      children: [
+                        PieChart(
+                          dataMap: {
+                            'Total':
+                                double.parse(snapshot.data!.cases!.toString()),
+                            'Recovered': double.parse(
+                                snapshot.data!.recovered!.toString()),
+                            'Deaths':
+                                double.parse(snapshot.data!.deaths!.toString()),
+                          },
+                          legendOptions: LegendOptions(
+                            legendPosition: LegendPosition.left,
+                            legendTextStyle: GoogleFonts.sourceSans3(
+                                textStyle: const TextStyle(
+                                    color: Colors.black, fontSize: 15.5)),
+                          ),
+                          animationDuration: const Duration(milliseconds: 1200),
+                          chartType: ChartType.ring,
+                          colorList: colorList,
+                          chartRadius: MediaQuery.of(context).size.width / 2.5,
+                          chartValuesOptions: ChartValuesOptions(
+                            chartValueStyle: GoogleFonts.sourceSans3(
+                              textStyle: const TextStyle(
+                                  color: Colors.black, fontSize: 15.5),
+                            ),
+                            showChartValuesInPercentage: true,
+                            // showChartValuesOutside: true
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.06,
+                        ),
+                        Card(
+                          child: Column(
+                            children: [
+                              ReusableRow(
+                                  title: 'Total',
+                                  value: snapshot.data!.cases!.toString()),
+                              ReusableRow(
+                                  title: 'Recovered',
+                                  value: snapshot.data!.recovered!.toString()),
+                              ReusableRow(
+                                  title: 'Death',
+                                  value: snapshot.data!.deaths!.toString()),
+                              ReusableRow(
+                                  title: 'Active',
+                                  value: snapshot.data!.active!.toString()),
+                              ReusableRow(
+                                  title: 'Critical',
+                                  value: snapshot.data!.critical!.toString()),
+                              ReusableRow(
+                                  title: 'Today Deaths',
+                                  value:
+                                      snapshot.data!.todayDeaths!.toString()),
+                              ReusableRow(
+                                  title: 'Today Recovered',
+                                  value: snapshot.data!.todayRecovered!
+                                      .toString()),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.06,
+                        ),
+                        SizedBox(
+                          height: 60,
+                          width: 250,
+                          child: FilledButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const CountriesList(),
+                                ),
+                              );
+                            },
+                            child: const Text(
+                              'Country Specific Stats',
+                              style: TextStyle(fontSize: 16.5),
+                            ),
+                          ),
+                        )
+                      ],
+                    );
                   }),
             ],
           ),
