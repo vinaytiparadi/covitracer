@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.sourceSans3TextTheme(),
         useMaterial3: true,
-        primarySwatch: Colors.lightGreen,
+        colorSchemeSeed: Colors.lightGreenAccent,
       ),
       home: const SplashScreen(),
     );
